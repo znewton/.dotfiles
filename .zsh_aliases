@@ -1,0 +1,9 @@
+alias vrc='vim ~/.zshrc'
+alias src='source ~/.zshrc'
+alias vbp='vim ~/.bash_profile'
+alias sbp='source ~/.bash_profile'
+alias vza='vim ~/.zsh_aliases'
+
+alias Code='cd ~/Code'
+alias School='cd ~/School' 
+

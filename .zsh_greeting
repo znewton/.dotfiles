@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# --------
+# Env Vars
+# --------
+
+export EDITOR=vim
+
+# -------
+# On Boot
+# -------
+
+GREY='\033[38;5;240m'
+BLUE='\033[38;5;45m'
+NC='\033[0m'
+
+JOKE=""
+if [[ (( $+commands[dadJoke] )) ]]; then
+  JOKE="$(dadJoke)"
+do
+
+clear
+
+echo -en "
+${GREY}           ${BLUE}              ## ${GREY}
+${GREY}       ##  ${BLUE}             ##  ${GREY}    ##
+${GREY}      ##   ${BLUE}            ##   ${GREY}     ##
+${GREY}     ##    ${BLUE}           ##    ${GREY}      ##
+${GREY}    ##     ${BLUE}          ##     ${GREY}       ##
+${GREY}   ##      ${BLUE}         ##      ${GREY}        ##
+${GREY}  ##       ${BLUE}        ##       ${GREY}         ##
+${GREY}   ##      ${BLUE}       ##        ${GREY}        ##
+${GREY}    ##     ${BLUE}      ##         ${GREY}       ##
+${GREY}     ##    ${BLUE}     ##          ${GREY}      ##
+${GREY}      ##   ${BLUE}    ##           ${GREY}     ##
+${GREY}       ##  ${BLUE}   ##            ${GREY}    ##
+${GREY}           ${BLUE}  ##             ${GREY}
+
+${JOKE}
+
+${NC}"
+
