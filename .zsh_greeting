@@ -17,7 +17,7 @@ NC='\033[0m'
 JOKE=""
 if [[ (( $+commands[dadJoke] )) ]]; then
   JOKE="$(dadJoke)"
-do
+fi
 
 clear
 
