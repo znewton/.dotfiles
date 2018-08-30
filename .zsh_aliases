@@ -7,3 +7,5 @@ alias vza='vim ~/.zsh_aliases'
 alias Code='cd ~/Code'
 alias School='cd ~/School' 
 
+alias portfolio='cd ~/Code/portfolio'
+

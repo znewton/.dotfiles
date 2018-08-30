@@ -7,8 +7,11 @@ cmdX() {
 }
 
 gclone() {
-  if [ $1 == "-h" ]; then
-    echo '''
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+      -h|--help)
+        echo '''
 Clone a git repository.
 Usage:
   gc [Option] <user/organization> <repository> [target directory]
@@ -17,17 +20,22 @@ Options:
   --ssh: Use SSH protocol (default)
   --https: Use HTTPS protocol
 '''
-    return
-  fi
-  if [ $1 == "--https" ]; then
-    git clone https://github.com/$2/$3.git $4
-    return
-  fi
-  if [ $1 == "--ssh" ]; then
-    git clone git@github.com:$2/$3.git $4
-    return
-  fi
-  git clone git@github.com:$1/$2.git $3
+        return
+        ;;
+      --https)
+        git clone "https://github.com/$2/$3.git" "$4"
+        return
+        ;;
+      --ssh)
+        git clone "git@github.com:$2/$3.git" "$4"
+        return
+        ;;
+      *) 
+        break
+        ;;
+    esac
+  done
+  git clone "git@github.com:$1/$2.git" "$3"
 }
 
 dadJoke() {

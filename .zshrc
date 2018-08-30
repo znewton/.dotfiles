@@ -19,9 +19,9 @@ prompt_context(){}
 files_to_source=( ".zsh_functions" ".zsh_aliases" ".zsh_greeting" )
 
 for filename in "${files_to_source[@]}"; do
-  if [ -f "$filename" ]; then
-    source "$filename"
+  if [[ -f "$HOME/$filename" ]]; then
+    source "$HOME/$filename"
   fi
 done
 
-alias glslbp='cd ~/School/CS336/projects/glsl-boilerplate'
+alias glslbp='cd ~/glsl-boilerplate'

@@ -16,6 +16,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'joshdick/onedark.vim'
 Plugin 'tikhomirov/vim-glsl'
+Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
 filetype plugin indent on
@@ -48,4 +49,11 @@ let g:netrw_winsize = 25
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'yarn lint'
+
+" when running at every change you may want to disable quickfix
+let g:prettier#quickfix_enabled = 0
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+
 

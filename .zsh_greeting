@@ -15,7 +15,7 @@ BLUE='\033[38;5;45m'
 NC='\033[0m'
 
 JOKE=""
-if [[ (( $+commands[dadJoke] )) ]]; then
+if type dadJoke &>/dev/null; then
   JOKE="$(dadJoke)"
 fi
 
