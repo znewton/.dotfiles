@@ -2,6 +2,8 @@ export ZSH="/home/znewton/.oh-my-zsh"
 
 ZSH_THEME="agnoster"
 
+CASE_SENSITIVE="true"
+
 plugins=(
   git
 )

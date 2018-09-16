@@ -8,4 +8,11 @@ alias Code='cd ~/Code'
 alias School='cd ~/School' 
 
 alias portfolio='cd ~/Code/portfolio'
+alias sddec='cd ~/School/sddec18-12/client'
+
+alias tr360fr='cd ~/School/true360/frontend'
+
+
+export LOCAL_IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+alias serve='browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000'
 

@@ -9,14 +9,24 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-syntastic/syntastic'
 
 Plugin 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
+  \ 'do': ['yarn install'],
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
+" Theming
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'joshdick/onedark.vim'
-Plugin 'tikhomirov/vim-glsl'
+
+" Utilities
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'godlygeek/tabular'
+
+" Syntax Highlighting
+Plugin 'mxw/vim-jsx'
+Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -50,10 +60,13 @@ let g:netrw_winsize = 25
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'yarn lint'
 
+let g:vim_markdown_folding_disabled = 1
+
+
 " when running at every change you may want to disable quickfix
 let g:prettier#quickfix_enabled = 0
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.css,*.scss,*.less PrettierAsync
 
 
