@@ -26,4 +26,6 @@ for filename in "${files_to_source[@]}"; do
   fi
 done
 
+eval $( dircolors -b $HOME/.dircolors  )
+
 alias glslbp='cd ~/glsl-boilerplate'

@@ -46,7 +46,7 @@ sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8jd
 
 echo "Linking dotfiles..."
 
-files_to_link=( ".bash_profile" ".zshrc" ".vimrc" ".zsh_functions" ".zsh_greeting" ".zsh_aliases" )
+files_to_link=( ".bash_profile" ".zshrc" ".vimrc" ".zsh_functions" ".zsh_greeting" ".zsh_aliases" ".dircolors" )
 
 OLD_DOTS=".old_dotfiles"
 if [[ -d "$HOME/$OLD_DOTS" ]]; then
