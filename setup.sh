@@ -40,13 +40,15 @@ sudo apt-get update
 
 sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8jdk maven
 
+yarn global add browser-sync
+
 # -------------
 # Linking Files
 # -------------
 
 echo "Linking dotfiles..."
 
-files_to_link=( ".bash_profile" ".zshrc" ".vimrc" ".zsh_functions" ".zsh_greeting" ".zsh_aliases" ".dircolors" )
+files_to_link=( ".bash_profile" ".zshrc" ".vimrc" ".zsh_functions" ".zsh_greeting" ".zsh_aliases" ".dircolors" ".gitignore_global" )
 
 OLD_DOTS=".old_dotfiles"
 if [[ -d "$HOME/$OLD_DOTS" ]]; then
@@ -74,12 +76,12 @@ done
 echo "Configuring Git..."
 
 echo -n "Git Name (e.g. John Smith): "
-read ghubName
+read gitName
 echo -n "Git Email: "
-read ghubEmail
+read gitEmail
 
-git config --global user.name "$ghubName"
-git config --global user.email "$ghubEmail"
+git config --global user.name "$gitName"
+git config --global user.email "$gitEmail"
 
 git config --global alias.co checkout
 git config --global alias.br branch
@@ -89,6 +91,8 @@ git config --global alias.st status
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.last 'log -1 HEAD'
 git config --global alias.visual '!gitk'
+
+git config --global core.excludesfile ~/.gitignore_global
 
 # -----------------
 # Vim Configuration
@@ -101,4 +105,10 @@ if [[ ! -d "$HOME/.vim/bundle/Vundle.vim" ]]; then
 fi
 
 vim +PluginInstall +qall
+
+# -----------
+# Other Stuff
+# -----------
+
+mkdir ~/Code
 

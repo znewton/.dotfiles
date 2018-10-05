@@ -29,3 +29,5 @@ done
 eval $( dircolors -b $HOME/.dircolors  )
 
 alias glslbp='cd ~/glsl-boilerplate'
+
+export PATH="$(yarn global bin):$PATH"
