@@ -16,6 +16,9 @@ Plugin 'joshdick/onedark.vim'
 " Utilities
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'godlygeek/tabular'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'terryma/vim-multiple-cursors'
 
 " Syntax
 Plugin 'mxw/vim-jsx'
