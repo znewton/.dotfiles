@@ -16,9 +16,19 @@ Plugin 'joshdick/onedark.vim'
 " Utilities
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'godlygeek/tabular'
-Plugin 'Shougo/deoplete.nvim'
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-multiple-cursors'
+
+" 'Intellisense'
+Plugin 'ternjs/tern_for_vim', { 'do': 'yarn install' }
+Plugin 'carlitux/deoplete-ternjs'
 
 " Syntax
 Plugin 'mxw/vim-jsx'
@@ -50,7 +60,19 @@ let g:netrw_winsize = 25
 
 let g:ale_fixers = { 'javascript': ['prettier', 'eslint']}
 let g:ale_fix_on_save = 1
+let g:ale_pattern_options = {
+      \  '.*CS336/projects/.*': { 'ale_fixers': [], 'ale_linters': [] },
+      \}
 
 let g:vim_markdown_folding_disabled = 1
 
+" Use tern_for_vim.
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx'
+                \]
 

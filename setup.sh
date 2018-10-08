@@ -38,9 +38,11 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 
 sudo apt-get update
 
-sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8jdk maven
+sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8jdk maven python3 python3-pip
 
 yarn global add browser-sync
+
+pip install neovim
 
 # -------------
 # Linking Files
