@@ -26,3 +26,9 @@ Generated git config with all my favorite aliases, and your Name + Email.
 
 Common dev environment packages such as node, python, and openjdk are installed to avoid hastle later on.
 
+## Screenshots
+
+![Terminal](images/shell-example-1.png)
+
+![Vim](images/vim-example-1.png)
+
