@@ -20,3 +20,4 @@ alias killNode="killall -KILL node";
 
 alias fix='git diff --name-only | uniq | xargs vim -p'
 
+alias pip='pip3'

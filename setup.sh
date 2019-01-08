@@ -41,11 +41,11 @@ wget -O yarnpkg.gpg.pub https://dl.yarnpkg.com/debian/pubkey.gpg
 gpg yarnpkg.gpg.pub #just check the expired date of the key
 sudo apt-key add yarnpkg.gpg.pub
 
-sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8-jdk maven python3 python3-pip
+sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8-jdk maven python3 python3-venv python3-pip
 
 yarn global add browser-sync
 
-pip install neovim
+pip3 install neovim
 
 # -------------
 # Linking Files
