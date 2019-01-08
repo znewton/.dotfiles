@@ -1,44 +1,47 @@
 #!/usr/bin/env bash
 
+# -------
+# Initial
+# -------
+
+echo "Initial Installs/Upgrades..."
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y curl vim git
+
 # ---------
 # ZSH Setup
 # ---------
 
-echo "Checking ZSH..."
+echo -e "\n\nChecking ZSH..."
 
-if ! test -n $ZSH_VERSION; then
+if ! [ -x "$(command -v zsh)" ]; then
   echo "Install ZSH? (Y/n)"
-  read confirm
-  if [[ -z "$confirm" ]] || [[ "$confirm" =~ y|Y|yes ]]; then
-    if type apt-get &>/dev/null; then
-      sudo apt-get update
-      sudo apt-get upgrade
-      sudo apt-get install zsh
-    elif type brew &>/dev/null; then
-      brew install zsh
-    fi
-    sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
-    zsh
+  read zsh_confirm
+  if [[ -z "$zsh_confirm" ]] || [[ "$zsh_confirm" =~ y|Y|yes ]]; then
+    sudo apt-get install zsh
+    sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s $(which zsh)
   fi
 fi
 
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  echo "Install OhMyZSH? (Y/n)"
-  read confirm
 
-  if [[ -z "$confirm" ]] || [[ "$confirm" =~ y|Y|yes ]]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  fi
-fi
+# ----------------
+# Dev Dependencies
+# ----------------
 
-echo "Installing dev dependencies"
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+echo -e "\n\nInstalling dev dependencies..."
 
 sudo apt-get update
 
-sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8jdk maven python3 python3-pip
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+wget -O yarnpkg.gpg.pub https://dl.yarnpkg.com/debian/pubkey.gpg
+gpg yarnpkg.gpg.pub #just check the expired date of the key
+sudo apt-key add yarnpkg.gpg.pub
+
+sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8-jdk maven python3 python3-pip
 
 yarn global add browser-sync
 
@@ -48,7 +51,7 @@ pip install neovim
 # Linking Files
 # -------------
 
-echo "Linking dotfiles..."
+echo -e "\n\nLinking dotfiles..."
 
 files_to_link=( ".bash_profile" ".zshrc" ".vimrc" ".zsh_functions" ".zsh_greeting" ".zsh_aliases" ".dircolors" ".gitignore_global" )
 
@@ -75,7 +78,7 @@ done
 # Git Configuration
 # -----------------
 
-echo "Configuring Git..."
+echo -e "\n\nConfiguring Git..."
 
 echo -n "Git Name (e.g. John Smith): "
 read gitName
@@ -100,7 +103,7 @@ git config --global core.excludesfile ~/.gitignore_global
 # Vim Configuration
 # -----------------
 
-echo "Configuring Vim..."
+echo -e "\n\nConfiguring Vim..."
 
 if [[ ! -d "$HOME/.vim/bundle/Vundle.vim" ]]; then
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -112,5 +115,29 @@ vim +PluginInstall +qall
 # Other Stuff
 # -----------
 
-mkdir ~/Code
+echo -e "\n\nA few more things..."
+
+if [[ ! -d "$HOME/Code" ]]; then
+ mkdir "$HOME/Code"
+fi
+
+
+# -------
+# Wrap Up
+# -------
+
+echo -e "\n\nWrapping up..."
+
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "Install OhMyZSH? (Y/n)"
+  read omz_confirm
+
+  if [[ -z "$omz_confirm" ]] || [[ "$omz_confirm" =~ y|Y|yes ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  fi
+fi
+
+if [[ -z "$zsh_confirm" ]] || [[ "$zsh_confirm" =~ y|Y|yes ]]; then
+  zsh
+fi
 
