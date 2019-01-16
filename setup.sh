@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
+echo "Package manager: "
+read pkg_mng
+if ! [ -x "$(command -v "$pkg_mng")" ]; then
+  echo "$pkg_mng command does not exist. Exiting..."
+  exit
+fi
+
 # -------
 # Initial
 # -------
 
 echo "Initial Installs/Upgrades..."
 
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install -y curl vim git
+sudo $pkg_mng update
+sudo $pkg_mng upgrade
+sudo $pkg_mng install -y curl vim git
 
 # ---------
 # ZSH Setup
@@ -20,7 +27,7 @@ if ! [ -x "$(command -v zsh)" ]; then
   echo "Install ZSH? (Y/n)"
   read zsh_confirm
   if [[ -z "$zsh_confirm" ]] || [[ "$zsh_confirm" =~ y|Y|yes ]]; then
-    sudo apt-get install zsh
+    sudo $pkg_mng install zsh
     sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s $(which zsh)
   fi
 fi
@@ -32,7 +39,7 @@ fi
 
 echo -e "\n\nInstalling dev dependencies..."
 
-sudo apt-get update
+sudo $pkg_mng update
 
 curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -41,7 +48,7 @@ wget -O yarnpkg.gpg.pub https://dl.yarnpkg.com/debian/pubkey.gpg
 gpg yarnpkg.gpg.pub #just check the expired date of the key
 sudo apt-key add yarnpkg.gpg.pub
 
-sudo apt-get install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8-jdk maven python3 python3-venv python3-pip
+sudo $pkg_mng install -y nodejs yarn gcc make zip unzip openjdk-8-jre openjdk-8-jdk maven python3 python3-venv python3-pip
 
 yarn global add browser-sync
 
