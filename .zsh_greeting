@@ -14,6 +14,11 @@ GREY='\033[38;5;240m'
 BLUE='\033[38;5;45m'
 NC='\033[0m'
 
+WEATHER=""
+if type weather &>/dev/null; then
+  WEATHER="$(weather)"
+fi
+
 JOKE=""
 if type dadJoke &>/dev/null; then
   JOKE="$(dadJoke)"
@@ -21,7 +26,7 @@ fi
 
 clear
 
-echo -en "
+DEV_LOGO="
 ${GREY}           ${BLUE}              ## ${GREY}
 ${GREY}       ##  ${BLUE}             ##  ${GREY}    ##
 ${GREY}      ##   ${BLUE}            ##   ${GREY}     ##
@@ -35,7 +40,11 @@ ${GREY}     ##    ${BLUE}     ##          ${GREY}      ##
 ${GREY}      ##   ${BLUE}    ##           ${GREY}     ##
 ${GREY}       ##  ${BLUE}   ##            ${GREY}    ##
 ${GREY}           ${BLUE}  ##             ${GREY}
-
+"
+echo -en "
+${GREY}
+${WEATHER}
+${GREY}
 ${JOKE}
 
 ${NC}"

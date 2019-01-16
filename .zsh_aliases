@@ -13,7 +13,7 @@ alias portfolio='cd ~/Code/portfolio'
 alias tr360fr='cd ~/Code/true360/frontend'
 
 
-export LOCAL_IP=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+export LOCAL_IP=`ip a | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
 alias serve='browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000'
 
 alias killNode="killall -KILL node";
@@ -21,3 +21,5 @@ alias killNode="killall -KILL node";
 alias fix='git diff --name-only | uniq | xargs vim -p'
 
 alias pip='pip3'
+
+alias weather='curl "wttr.in/?0q"'

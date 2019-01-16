@@ -25,6 +25,7 @@ else
 endif
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'dhruvasagar/vim-table-mode'
 
 " 'Intellisense'
 Plugin 'ternjs/tern_for_vim', { 'do': 'yarn install' }
@@ -76,3 +77,5 @@ let g:deoplete#sources#ternjs#filetypes = [
                 \ 'javascript.jsx'
                 \]
 
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
