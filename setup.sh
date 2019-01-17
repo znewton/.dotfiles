@@ -17,6 +17,9 @@ sudo $pkg_mng update
 sudo $pkg_mng upgrade
 sudo $pkg_mng install -y curl vim git
 
+OLD_DOTS=".old_dotfiles"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 # ---------
 # ZSH Setup
 # ---------
@@ -27,8 +30,17 @@ if ! [ -x "$(command -v zsh)" ]; then
   echo "Install ZSH? (Y/n)"
   read zsh_confirm
   if [[ -z "$zsh_confirm" ]] || [[ "$zsh_confirm" =~ y|Y|yes ]]; then
-    sudo $pkg_mng install zsh
+    sudo $pkg_mng install -y zsh fonts-powerline
     sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s $(which zsh)
+  fi
+fi
+
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "Install OhMyZSH? (Y/n)"
+  read omz_confirm
+
+  if [[ -z "$omz_confirm" ]] || [[ "$omz_confirm" =~ y|Y|yes ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
   fi
 fi
 
@@ -62,13 +74,10 @@ echo -e "\n\nLinking dotfiles..."
 
 files_to_link=( ".bash_profile" ".zshrc" ".vimrc" ".zsh_functions" ".zsh_greeting" ".zsh_aliases" ".dircolors" ".gitignore_global" )
 
-OLD_DOTS=".old_dotfiles"
 if [[ -d "$HOME/$OLD_DOTS" ]]; then
   rm -rf "$HOME/$OLD_DOTS"
 fi
 mkdir "$HOME/$OLD_DOTS"
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 for filename in "${files_to_link[@]}"; do
   # if the file exists, archive it
@@ -106,6 +115,13 @@ git config --global alias.visual '!gitk'
 
 git config --global core.excludesfile ~/.gitignore_global
 
+if [[ ! -f "$HOME/.ssh/id_ecdsa.pub" ]]; then
+  yes y |ssh-keygen -q -t ecdsa -N '' >/dev/null
+fi
+echo "Copy the following SSH key to your GitHub account (ENTER to continue):"
+cat "$HOME/.ssh/id_ecdsa.pub"
+read ENTER
+
 # -----------------
 # Vim Configuration
 # -----------------
@@ -118,6 +134,18 @@ fi
 
 vim +PluginInstall +qall
 
+# -------------------
+# GNOME Configuration
+# -------------------
+
+if [echo "$XDG_CURRENT_DESKTOP" | grep -Eio 'gnome']; then
+  echo -e "\n\nConfiguring GNOME..."
+  sudo add-apt-repository -u -y ppa:snwh/ppa
+  sudo $pkg_mng install -y arc-theme gnome-themes-standard gtk2-engines-murrine gnome-shell-extensions gnome-tweak-tool moka-icon-theme faba-icon-theme faba-mono-icons
+  dconf load / < "$DIR/saved_settings.dconf"
+fi
+
+
 # -----------
 # Other Stuff
 # -----------
@@ -128,21 +156,18 @@ if [[ ! -d "$HOME/Code" ]]; then
  mkdir "$HOME/Code"
 fi
 
+if [ "$(ls -A "$HOME/Documents")" ]; then
+  mv "$HOME/Documents" "$HOME/.old-Documents"
+else
+  git clone git@github.com:znewton/Documents "$HOME/Documents"
+fi
+
 
 # -------
 # Wrap Up
 # -------
 
 echo -e "\n\nWrapping up..."
-
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  echo "Install OhMyZSH? (Y/n)"
-  read omz_confirm
-
-  if [[ -z "$omz_confirm" ]] || [[ "$omz_confirm" =~ y|Y|yes ]]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  fi
-fi
 
 if [[ -z "$zsh_confirm" ]] || [[ "$zsh_confirm" =~ y|Y|yes ]]; then
   zsh
