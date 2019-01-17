@@ -136,7 +136,7 @@ display=['MEI', 'VVX14P048M00', '0x44211100']
 automatic-timezone=true
 
 [org/gnome/desktop/background]
-picture-uri='file:///home/znewton/Downloads/emil-vilsek-488155-unsplash.jpg'
+picture-uri='file:///home/znewton/.dotfiles/Background.jpg'
 show-desktop-icons=false
 color-shading-type='solid'
 primary-color='#333333'

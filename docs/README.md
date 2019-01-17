@@ -28,7 +28,5 @@ Common dev environment packages such as node, python, and openjdk are installed 
 
 ## Screenshots
 
-![Terminal](./images/shell-example-1.png)
-
-![Vim](./images/vim-example-1.png)
+![Desktop](./images/GNOME_Arc-Dark.png)
 
