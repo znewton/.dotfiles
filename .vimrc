@@ -12,6 +12,7 @@ Plugin 'w0rp/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'joshdick/onedark.vim'
+Plugin 'netsgnut/arctheme.vim'
 
 " Utilities
 Plugin 'jiangmiao/auto-pairs'
@@ -52,8 +53,8 @@ set smarttab
 set autoindent
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'onedark'
-colorscheme onedark
+let g:airline_theme = 'iceberg'
+colorscheme iceberg
 
 let g:netrw_liststyle = 3
 let g:netrw_altv = 1
