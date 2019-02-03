@@ -51,6 +51,7 @@ set shiftwidth=2
 set expandtab
 set smarttab
 set autoindent
+set cursorline
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'iceberg'

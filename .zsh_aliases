@@ -9,9 +9,11 @@ alias Code='cd ~/Code'
 alias School='cd ~/School' 
 
 alias portfolio='cd ~/Code/portfolio'
+alias esri='cd ~/Code/arcgis-demo'
 
 alias tr360fr='cd ~/Code/true360/frontend'
 
+alias blender='/home/znewton/Code/blender-git/build_linux/bin/blender'
 
 export LOCAL_IP=`ip a | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
 alias serve='browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000'

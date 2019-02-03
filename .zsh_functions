@@ -59,3 +59,47 @@ gPrune() {
   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
 }
 
+thought() {
+  if [[ ! -d "$HOME/.thoughts" ]]; then
+    mkdir $HOME/.thoughts
+  fi
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+      -h|--help)
+        echo '''
+Jot down a thought
+
+Usage:
+  thought [option]
+
+Options:
+  -h: View this message  
+  -l <n>: List <n> previous thoughts. <n> defaults to all if nothing entered.
+'''
+        return
+        ;;
+      -l)
+        temp_filename="$HOME/.thoughts/.temp.md"
+        for filename in $HOME/.thoughts/*.md; do
+          cat $filename >> $temp_filename
+        done
+        less $temp_filename
+        rm $temp_filename
+        return
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  thoughtName="$HOME/.thoughts/$(date +"%Y-%m-%d_%H-%M-%S").md"
+  touch "$thoughtName"
+  cat > "$thoughtName" << EOF
+### $(date +"%b %d, %Y - %r")
+
+
+
+EOF
+  $EDITOR -c 'startinsert' "$thoughtName" +3 
+}
