@@ -25,3 +25,5 @@ alias fix='git diff --name-only | uniq | xargs vim -p'
 alias pip='pip3'
 
 alias weather='curl "wttr.in/?0q"'
+
+alias l='ls -lAh'
