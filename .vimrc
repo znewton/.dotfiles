@@ -41,6 +41,8 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'avakhov/vim-yaml'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
 
 call vundle#end()
 filetype plugin indent on
@@ -73,7 +75,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-let g:ale_fixers = { 'javascript': ['prettier', 'eslint']}
+let g:ale_fixers = { 'javascript': ['prettier', 'eslint'], 'typescript': ['prettier', 'tslint']}
 let g:ale_fix_on_save = 1
 let g:ale_pattern_options = {
       \  '.*CS336/projects/.*': { 'ale_fixers': [], 'ale_linters': [] },
@@ -98,5 +100,6 @@ augroup Syntax
   au!
   autocmd BufNewFile,BufRead .prettierrc set syntax=json
   autocmd BufNewFile,BufRead .eslintrc set syntax=json
+  autocmd BufNewFile,BufRead .babelrc set syntax=json
 augroup END
 

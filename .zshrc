@@ -18,7 +18,7 @@ fi
 DEFAULT_USER=znewton
 prompt_context(){}
 
-files_to_source=( ".zsh_functions" ".zsh_aliases" ".zsh_greeting" )
+files_to_source=( ".zsh_functions" ".zsh_aliases" ".zsh_greeting" ".zsh_private" )
 
 for filename in "${files_to_source[@]}"; do
   if [[ -f "$HOME/$filename" ]]; then

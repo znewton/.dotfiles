@@ -6,12 +6,9 @@ alias vza='vim ~/.zsh_aliases'
 alias sza='source ~/.zsh_aliases'
 
 alias Code='cd ~/Code'
-alias School='cd ~/School' 
 
-alias portfolio='cd ~/Code/portfolio'
+alias portfolio='cd ~/Code/Websites/portfolio'
 alias esri='cd ~/Code/arcgis-demo'
-
-alias tr360fr='cd ~/Code/true360/frontend'
 
 alias blender='/home/znewton/Code/blender-git/build_linux/bin/blender'
 
