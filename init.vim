@@ -1,54 +1,38 @@
-set nocompatible
-filetype off
+call plug#begin('~/.local/share/nvim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Theming
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'joshdick/onedark.vim'
-Plugin 'netsgnut/arctheme.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'joshdick/onedark.vim'
+Plug 'netsgnut/arctheme.vim'
 
 " Utilities
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'godlygeek/tabular'
-if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
-Plugin 'airblade/vim-gitgutter'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'godlygeek/tabular'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'airblade/vim-gitgutter'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Syntax
-Plugin 'mxw/vim-jsx'
-Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'pangloss/vim-javascript'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'avakhov/vim-yaml'
-Plugin 'HerringtonDarkholme/yats.vim'
-Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'jparise/vim-graphql'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'avakhov/vim-yaml'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'jparise/vim-graphql'
 
 " 'Intellisense'
-Plugin 'ternjs/tern_for_vim', { 'do': 'yarn install' }
-Plugin 'carlitux/deoplete-ternjs'
+Plug 'ternjs/tern_for_vim'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm i -g tern' }
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 
+call plug#end()
 
-call vundle#end()
 filetype plugin indent on
-
 syntax on
 
 set number
@@ -77,7 +61,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-let g:ale_fixers = { 'javascript': ['prettier', 'eslint'], 'typescript': ['prettier', 'tslint']}
+let g:ale_fixers = { 
+	\  'javascript': ['prettier', 'eslint'],
+	\  'typescript': ['prettier', 'tslint']
+	\}
 let g:ale_fix_on_save = 1
 let g:ale_pattern_options = {
       \  '.*CS336/projects/.*': { 'ale_fixers': [], 'ale_linters': [] },
@@ -91,6 +78,7 @@ let g:tern#arguments = ["--persistent"]
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#ternjs#filetypes = [
+		\ 'js',
                 \ 'jsx',
                 \ 'javascript.jsx'
                 \]

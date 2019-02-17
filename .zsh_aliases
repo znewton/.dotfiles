@@ -9,6 +9,7 @@ alias Code='cd ~/Code'
 
 alias portfolio='cd ~/Code/Websites/portfolio'
 alias esri='cd ~/Code/arcgis-demo'
+alias myx='cd ~/Code/Websites/myx/'
 
 alias blender='/home/znewton/Code/blender-git/build_linux/bin/blender'
 

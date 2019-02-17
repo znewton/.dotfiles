@@ -134,6 +134,30 @@ fi
 
 vim +PluginInstall +qall
 
+# --------------------
+# NeoVim Configuration
+# --------------------
+
+echo -e "\n\nConfiguring NeoVim"
+
+sudo $pkg_mng install -y software-properties-common
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo $pkg_mng update
+sudo $pkg_mng install -y neovim
+sudo $pkg_mng install -y python-dev python-pip python3-dev python3-pip
+sudo $pkg_mng install -y ruby-full
+sudo gem install neovim
+sudo npm i -g neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+pip2 install pynvim
+pip3 install pynvim
+
+mkdir -p "$HOME/.config/nvim"
+ln -sf "$DIR/init.vim" "$HOME/.config/nvim/init.vim"
+
+nvim +PlugInstall +UpdateRemotePlugins +qall
+
 # -------------------
 # GNOME Configuration
 # -------------------
